@@ -1,0 +1,65 @@
+---
+title: "Quarto Practice"
+format: html
+editor: visual
+execute: 
+  warning: false # setting options globally for entire document/script
+---
+
+```{r}
+library(tidyverse)
+```
+
+## Suppressing warning and messages JUST for this code chunk.
+
+```{r}
+#| warning: false 
+#| message: false
+library(tidyverse)
+```
+
+## Running code, but not showing code or output
+
+```{r}
+#| include: false
+
+# Return/ Show the first 6 lines of the starwars data
+head(starwars)
+
+#Return/ Shows the dimensions of starwars data
+dim(starwars)
+```
+
+## Showing output, but not code
+
+```{r}
+#| warning: false
+#| echo: false  #it wont show output (code or ouput. it will run it though)
+# include: false will not show code or plot
+ggplot(data = starwars, aes(x= height, y=mass, color =mass)) +
+  geom_point()+
+  labs(x= "Height (cm)",
+       y= "Mass (kg)")
+```
+
+# Creating GGplot: Show only code and output
+
+```{r}
+#| warning: false
+#| message: false
+#| fig-cap: "Caption text"
+#| fig-alt: "figure alt text"
+ggplot(data= starwars, aes(x= height)) +
+  geom_histogram(color = "black", fill = "blue")
+```
+
+Find summary stats for Star Wars characters
+
+```{r}
+sw_height_mean <- mean(starwars$height, na.rm=TRUE)
+sw_height_median <- median(starwars$height, na.rm=TRUE)
+sw_height_var <- var(starwars$height, na.rm = TRUE)
+sw_height_sd <- sd(starwars$height, na.rm = TRUE)
+```
+
+The mean height of the characters in Star Wars is `r round (sw_height_mean,1)` centimeters.
